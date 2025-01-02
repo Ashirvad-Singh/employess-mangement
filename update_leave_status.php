@@ -11,7 +11,6 @@ if (isset($_GET['id']) && isset($_GET['status'])) {
     $leave_id = $_GET['id'];  
     $status = $_GET['status']; 
 
-    // Validate the status
     if ($status != 'approved' && $status != 'rejected') {
         echo "Invalid status.";
         exit();
