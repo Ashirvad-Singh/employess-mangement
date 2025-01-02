@@ -16,20 +16,17 @@ $pan_card = $_POST['pan_card'];
 $salary = $_POST['salary'];
 $role = $_POST['role'];
 $username = $_POST['username'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$password = $_POST['password'];
 
-// Handle Photo Upload
 $photo = $_FILES['photo']['name'];
 $photo_tmp = $_FILES['photo']['tmp_name'];
 $photo_folder = 'uploads/' . $photo;
 
 if (move_uploaded_file($photo_tmp, $photo_folder)) {
-    // Insert into users table
     $user_query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', 'employee')";
     if ($conn->query($user_query)) {
         $user_id = $conn->insert_id;
 
-        // Insert into employees table
         $employee_query = "INSERT INTO employees 
             (user_id, name, address, phone, email, adhar_card, pan_card, salary, role, photo) 
             VALUES 

@@ -23,24 +23,11 @@ $leave_requests = $conn->query("
     <title>Admin Dashboard</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 p-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="admin_dashboard.php" class="text-white text-2xl font-semibold">Admin Dashboard</a>
-            <div class="space-x-4">
-                <a href="admin_dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
-                <a href="create_employee.php" class="text-white hover:text-blue-200">Create Employee</a>
-                <a href="manage_employees.php" class="text-white hover:text-blue-200">Manage Employees</a>
-                <a href="leave_request.php" class="text-white hover:text-blue-200">Leave Requests</a>
-                <a href="logout.php" class="text-white hover:text-blue-200">Logout</a>
-            </div>
-        </div>
-    </nav>
+    <?php include 'header.php'; ?>
 
     <div class="p-6 max-w-7xl mx-auto">
-        <h1 class="text-3xl font-bold text-blue-600 mb-6">Admin Dashboard</h1>
 
-        <!-- Summary Section -->
+
         <div class="grid grid-cols-2 gap-6 mb-6">
             <div class="bg-white p-4 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold">Total Employees</h2>
@@ -52,7 +39,6 @@ $leave_requests = $conn->query("
             </div>
         </div>
 
-        <!-- Leave Requests -->
         <h2 class="text-2xl font-semibold mb-4">Leave Requests</h2>
         <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead class="bg-gray-200">

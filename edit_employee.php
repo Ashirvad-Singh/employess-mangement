@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $role = $_POST['role'];
     $username = $_POST['username'];
     
-    // Photo Upload Handling (optional, if you want to allow the admin to change the photo)
+    // Photo Upload Handling
     $photo = $_FILES['photo']['name'];
     $photo_tmp = $_FILES['photo']['tmp_name'];
     $photo_folder = 'uploads/' . $photo;
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE id = '$employee_id'";
 
     if ($conn->query($update_query)) {
-        header("Location: manage_employees.php");
+        header("Location: manage_employees.php?message=Employee Updated Successfully");
     } else {
         echo "Error: " . $conn->error;
     }
@@ -86,27 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-<!-- Navbar -->
-<nav class="bg-blue-600 p-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="admin_dashboard.php" class="text-white text-2xl font-semibold">Admin Dashboard</a>
-        <div class="space-x-4">
-            <a href="admin_dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
-            <a href="create_employee.php" class="text-white hover:text-blue-200">Create Employee</a>
-            <a href="manage_employees.php" class="text-white hover:text-blue-200">Manage Employees</a>
-            <a href="request_leave.php" class="text-white hover:text-blue-200">Leave Requests</a>
-            <a href="logout.php" class="text-white hover:text-blue-200">Logout</a>
-        </div>
-    </div>
-</nav>
+<?php include 'header.php'; ?>
 
-<!-- Edit Employee Form -->
+
 <div class="p-6 max-w-7xl mx-auto">
     <h1 class="text-3xl font-bold text-blue-600 mb-6">Edit Employee</h1>
 
     <form action="edit_employee.php?id=<?= $employee['id'] ?>" method="POST" enctype="multipart/form-data">
         <div class="grid grid-cols-2 gap-6">
-            <!-- Employee Information -->
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" value="<?= $employee['name'] ?>" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
@@ -139,14 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
                 <input type="text" name="role" value="<?= $employee['role'] ?>" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
             </div>
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                <input type="text" name="username" value="<?= $employee['username'] ?>" class="mt-1 p-2 w-full border border-gray-300 rounded-lg" required>
-            </div>
+            
             <div>
                 <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
                 <input type="file" name="photo" class="mt-1 p-2 w-full border border-gray-300 rounded-lg">
-                <img src="uploads/<?= $employee['photo'] ?>" alt="Employee Photo" class="mt-2 w-32 h-32 object-cover">
+                <img src="uploads/<?= isset($employee['photo']) && $employee['photo'] ? $employee['photo'] : 'default.png' ?>" alt="Employee Photo" class="mt-2 w-32 h-32 object-cover rounded-full">
             </div>
         </div>
 

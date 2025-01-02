@@ -22,10 +22,11 @@ $leave_requests = $conn->query("SELECT leave_requests.*, employees.name FROM lea
     <title>Manage Leave Requests</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
+<?php include 'header.php'; ?>
+
     <div class="p-6 max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold text-blue-600 mb-6">Leave Requests</h1>
 
-        <!-- Leave Requests Table -->
         <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead class="bg-gray-200">
                 <tr>
@@ -47,14 +48,12 @@ $leave_requests = $conn->query("SELECT leave_requests.*, employees.name FROM lea
                         <td class="p-4"><?= ucfirst($leave['status']) ?></td>
                         <td class="p-4">
                             <?php if ($leave['status'] == 'pending') { ?>
-                                <!-- Approve Leave -->
                                 <a href="update_leave_status.php?id=<?= $leave['id'] ?>&status=approved" 
                                    class="text-green-600">Approve</a> | 
-                                <!-- Reject Leave -->
                                 <a href="update_leave_status.php?id=<?= $leave['id'] ?>&status=rejected" 
                                    class="text-red-600">Reject</a>
                             <?php } else {
-                                echo "-"; // No action if already approved or rejected
+                                echo "-";
                             } ?>
                         </td>
                     </tr>

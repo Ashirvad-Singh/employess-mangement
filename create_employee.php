@@ -16,6 +16,8 @@ if ($_SESSION['role'] != 'admin') {
     <title>Create Employee</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
+<?php include 'header.php'; ?>
+
     <div class="p-6 max-w-5xl mx-auto">
         <h1 class="text-3xl font-bold text-blue-600 mb-6">Create Employee</h1>
         <form action="create_employee_process.php" method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
